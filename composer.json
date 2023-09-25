@@ -1,0 +1,31 @@
+{
+  "name": "vladviolentiy/viva-bot-gates",
+  "description": "Messenger bot gates",
+  "type": "library",
+  "license": "Apache-2.0",
+  "minimum-stability": "stable",
+  "autoload": {
+    "psr-4": {
+      "VladViolentiy\\VivaBotGates\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "VladViolentiy\\VivaBotGates\\Tests\\": "tests/"
+    }
+  },
+  "authors": [
+    {
+      "name": "vlad",
+      "email": "vladviolentiy@gmail.com"
+    }
+  ],
+  "require": {
+    "guzzlehttp/guzzle": "^7.8.0",
+    "php": "^8.1"
+  },
+  "require-dev": {
+    "phpstan/phpstan": "^1.10",
+    "phpunit/phpunit": "^10.1"
+  }
+}
