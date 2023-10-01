@@ -18,7 +18,7 @@ class Telegram extends Metacore
     }
 
     /**
-     * @param int<min,-1>|int<1,max> $chatId
+     * @param non-zero-int $chatId
      * @param positive-int $messageId
      * @param non-empty-string $text
      * @param string $inlineInfo
@@ -63,7 +63,7 @@ class Telegram extends Metacore
     }
 
     /**
-     * @param int<min,-1>|int<1,max> $userId
+     * @param non-zero-int $userId
      * @param non-empty-string $imgUrl
      * @param string $text
      * @param string $inlineInfo
@@ -96,16 +96,17 @@ class Telegram extends Metacore
         ];
         if($buttons!==null){
             if($inlineMode){
+                /** @var string $encoded */
                 $encoded = json_encode([
                     "inline_keyboard"=>$buttons
                 ]);
             } else {
+                /** @var string $encoded */
                 $encoded = json_encode([
                     "keyboard"=>$buttons,
                     "resize_keyboard"=>true
                 ]);
             }
-
 
             $params['reply_markup'] = $encoded;
         }
