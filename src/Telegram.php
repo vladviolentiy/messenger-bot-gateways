@@ -110,9 +110,6 @@ class Telegram extends Metacore
             $params['reply_markup'] = $encoded;
         }
 
-        if($button=="contact") $params['reply_markup'] = '{"keyboard":[[{"text":"Отправить контакт","request_contact":true}]],"resize_keyboard":true}';
-        if($button=="deleteButton") $params['reply_markup'] = '{"remove_keyboard":true}';
-
         return $this->tgQuery("sendMessage", $params);
     }
 
