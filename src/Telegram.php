@@ -70,7 +70,7 @@ class Telegram extends Metacore
      * @return string
      * @throws GuzzleException
      */
-    public function sendPhoto(int $userId , string $imgUrl, string $text = "", string $inlineInfo = ""){
+    public function sendPhoto(int $userId , string $imgUrl, string $text = "", string $inlineInfo = ""):string{
         $params = [
             "photo"=>$imgUrl,
             "chat_id" => $userId
