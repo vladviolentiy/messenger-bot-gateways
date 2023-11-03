@@ -4,6 +4,7 @@ namespace VladViolentiy\VivaBotGates\Interfaces\Telegram;
 
 abstract class TelegramMessageObject
 {
+    /** @var positive-int  */
     public int $message_id;
     public TelegramFromObject $from;
     public TelegramChatObject $chat;

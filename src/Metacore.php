@@ -19,8 +19,8 @@ abstract class Metacore
 
     /**
      * @param non-empty-string $url
-     * @param array $params
-     * @param list<array<string,string>>|null $header
+     * @param array<string,string> $params
+     * @param array<string,string>|null $header
      * @return string
      * @throws GuzzleException
      */
