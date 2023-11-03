@@ -14,4 +14,5 @@ abstract class TelegramMessageObject
     public ?array $photo;
     public ?TelegramFileObject $document;
     public ?TelegramVoiceObject $voice;
+    public ?TelegramLocationObject $location;
 }
