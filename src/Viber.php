@@ -70,7 +70,6 @@ class Viber extends Metacore
      * @param non-empty-string $fileName
      * @param non-empty-string[] $buttons
      * @return string
-     * @throws ExternalServiceException
      */
     public function sendFile(string $userId, string $link, int $filesize, string $fileName, array $buttons = []):string{
         $data = [
