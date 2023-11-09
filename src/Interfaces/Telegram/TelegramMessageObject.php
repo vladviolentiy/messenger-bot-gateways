@@ -11,7 +11,7 @@ abstract class TelegramMessageObject
     public int $date;
     public ?string $text;
     public ?TelegramMessageObject $reply_to_message;
-    /** @var TelegramPhotoObject[] */
+    /** @var TelegramPhotoObject[]|null */
     public ?array $photo;
     public ?TelegramFileObject $document;
     public ?TelegramVoiceObject $voice;

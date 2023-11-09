@@ -9,7 +9,7 @@ class Telegram extends Metacore
 {
     /**
      * @param non-empty-string $method
-     * @param array $params
+     * @param array<non-empty-string,string|int|float|array<mixed>> $params
      * @return string
      * @throws \GuzzleHttp\Exception\GuzzleException
      */

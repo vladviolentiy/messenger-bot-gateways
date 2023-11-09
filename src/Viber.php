@@ -22,7 +22,7 @@ class Viber extends Metacore
 
     /**
      * @param non-empty-string[] $buttons
-     * @return array{Type:string,DefaultHeight:bool,Buttons:list<array{Columns:int,Rows:int,ActionType:string,ActionBody:string,Silent:bool,Text:string}>}
+     * @return array{Type:string,DefaultHeight:bool,Buttons:list<array{Columns:positive-int,Rows:positive-int,ActionType:string,ActionBody:string,Silent:bool,Text:string}>}
      */
     private function simpleButtonMapper(array $buttons):array{
         $buttons = array_map(function ($item){
@@ -46,7 +46,7 @@ class Viber extends Metacore
      * @param non-empty-string $userId
      * @param non-empty-string $link
      * @param non-empty-string[] $buttons
-     * @param string|null $description
+     * @param non-empty-string|null $description
      * @return string
      * @throws BotGateException
      */
