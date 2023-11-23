@@ -109,9 +109,9 @@ class Telegram extends Metacore
             }
 
             if($buttons===[]){
-                $params['reply_markup'] = [
+                $params['reply_markup'] = json_encode([
                     "remove_keyboard'"=>true
-                ];
+                ]);
             } else {
                 $params['reply_markup'] = $encoded;
 
