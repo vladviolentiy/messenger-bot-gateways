@@ -108,7 +108,14 @@ class Telegram extends Metacore
                 ]);
             }
 
-            $params['reply_markup'] = $encoded;
+            if($buttons===[]){
+                $params['reply_markup'] = [
+                    "remove_keyboard'"=>true
+                ];
+            } else {
+                $params['reply_markup'] = $encoded;
+
+            }
         }
 
         return $this->tgQuery("sendMessage", $params);
