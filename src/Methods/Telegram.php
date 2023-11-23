@@ -10,6 +10,7 @@ class Telegram
     /**
      * @param TelegramRequestInterface $query
      * @return array{clientId:non-zero-int,text:string,messageId:positive-int,type:"callback"|"text",fName:string}
+     * @throws DecodeException
      */
     public static function getBasicUserInfo($query):array{
         if(isset($query->callback_query)){
