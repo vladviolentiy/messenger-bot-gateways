@@ -2,7 +2,6 @@
 
 namespace VladViolentiy\VivaBotGates;
 
-use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
 
 class Telegram extends Metacore
@@ -13,8 +12,9 @@ class Telegram extends Metacore
      * @return string
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
-    private function tgQuery(string $method, array $params):string{
-        return $this->postQuery("https://api.telegram.org/".$this->botId."/$method",$params);
+    private function tgQuery(string $method, array $params): string
+    {
+        return $this->postQuery('https://api.telegram.org/' . $this->botId . "/$method", $params);
     }
 
     /**
@@ -25,17 +25,19 @@ class Telegram extends Metacore
      * @return string
      * @throws GuzzleException
      */
-    public function editMessage(int $chatId, int $messageId, string $text, string $inlineInfo=""):string{
+    public function editMessage(int $chatId, int $messageId, string $text, string $inlineInfo = ''): string
+    {
         $arr = [
-            "text"=>$text,
-            "chat_id"=>$chatId,
-            "message_id"=>$messageId,
-            "parse_mode"=>"markdown"
+            'text' => $text,
+            'chat_id' => $chatId,
+            'message_id' => $messageId,
+            'parse_mode' => 'markdown',
         ];
-        if($inlineInfo!="") {
-            $arr["reply_markup"] =$inlineInfo;
+        if ($inlineInfo != '') {
+            $arr['reply_markup'] = $inlineInfo;
         }
-        return $this->tgQuery("editMessageText",$arr);
+
+        return $this->tgQuery('editMessageText', $arr);
     }
 
     /**
@@ -43,9 +45,10 @@ class Telegram extends Metacore
      * @return void
      * @throws GuzzleException
      */
-    public function callBackAnswer(int $callback_message_id):void{
-        $this->tgQuery("answerCallbackQuery",[
-            "callback_query_id"=>$callback_message_id
+    public function callBackAnswer(int $callback_message_id): void
+    {
+        $this->tgQuery('answerCallbackQuery', [
+            'callback_query_id' => $callback_message_id,
         ]);
     }
 
@@ -55,10 +58,11 @@ class Telegram extends Metacore
      * @return string
      * @throws GuzzleException
      */
-    public function answerInlineQuery(int $callbackQueryId, string $text):string{
-        return $this->tgQuery("answerCallbackQuery",[
-            "text"=>$text,
-            "callback_query_id"=>$callbackQueryId
+    public function answerInlineQuery(int $callbackQueryId, string $text): string
+    {
+        return $this->tgQuery('answerCallbackQuery', [
+            'text' => $text,
+            'callback_query_id' => $callbackQueryId,
         ]);
     }
 
@@ -70,55 +74,60 @@ class Telegram extends Metacore
      * @return string
      * @throws GuzzleException
      */
-    public function sendPhoto(int $userId , string $imgUrl, string $text = "", string $inlineInfo = ""):string{
+    public function sendPhoto(int $userId, string $imgUrl, string $text = '', string $inlineInfo = ''): string
+    {
         $params = [
-            "photo"=>$imgUrl,
-            "chat_id" => $userId
+            'photo' => $imgUrl,
+            'chat_id' => $userId,
         ];
-        if($text!=='') $params['caption'] = $text;
-        if($inlineInfo!="") $params['reply_markup'] = $inlineInfo;
-        return $this->tgQuery("sendPhoto", $params);
+        if ($text !== '') {
+            $params['caption'] = $text;
+        }
+        if ($inlineInfo != '') {
+            $params['reply_markup'] = $inlineInfo;
+        }
+
+        return $this->tgQuery('sendPhoto', $params);
     }
 
     /**
      * @param non-zero-int $userId
      * @param non-empty-string $text
-     * @param array|null $buttons
+     * @param array<mixed>|null $buttons
      * @param bool $inlineMode
      * @return string
      * @throws GuzzleException
      */
-    public function sendMessage(int $userId, string $text, ?array $buttons = [], bool $inlineMode = false):string{
+    public function sendMessage(int $userId, string $text, ?array $buttons = [], bool $inlineMode = false): string
+    {
         $params = [
-            "text" => $text,
-            "chat_id" => $userId,
-            "parse_mode" => "markdown",
+            'text' => $text,
+            'chat_id' => $userId,
+            'parse_mode' => 'markdown',
         ];
-        if($buttons!==null){
-            if($inlineMode){
-                /** @var string $encoded */
+        if ($buttons !== null) {
+            if ($inlineMode) {
                 $encoded = json_encode([
-                    "inline_keyboard"=>$buttons
-                ]);
+                    'inline_keyboard' => $buttons,
+                ], JSON_THROW_ON_ERROR);
             } else {
-                /** @var string $encoded */
                 $encoded = json_encode([
-                    "keyboard"=>$buttons,
-                    "resize_keyboard"=>true
-                ]);
+                    'keyboard' => $buttons,
+                    'resize_keyboard' => true,
+                ], JSON_THROW_ON_ERROR);
             }
 
-            if($buttons===[]){
+            if ($buttons === []) {
                 $params['reply_markup'] = json_encode([
-                    "remove_keyboard'"=>true
-                ]);
+                    "remove_keyboard'" => true,
+                ], JSON_THROW_ON_ERROR);
             } else {
                 $params['reply_markup'] = $encoded;
 
             }
         }
 
-        return $this->tgQuery("sendMessage", $params);
+        return $this->tgQuery('sendMessage', $params);
     }
 
     /**
@@ -126,11 +135,13 @@ class Telegram extends Metacore
      * @return string
      * @throws GuzzleException
      */
-    public function getFile(string $fileId):string{
-        $postData = $this->tgQuery("getFile", [
-            "file_id"=>$fileId
+    public function getFile(string $fileId): string
+    {
+        $postData = $this->tgQuery('getFile', [
+            'file_id' => $fileId,
         ]);
         $decodedData = json_decode($postData);
-        return "https://api.telegram.org/file/" . $this->botId . "/".$decodedData->result->file_path;
+
+        return 'https://api.telegram.org/file/' . $this->botId . '/' . $decodedData->result->file_path;
     }
 }

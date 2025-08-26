@@ -14,7 +14,6 @@ abstract class Metacore
     {
         $this->client = new Client();
         $this->botId = $botId;
-
     }
 
     /**
@@ -24,14 +23,16 @@ abstract class Metacore
      * @return string
      * @throws GuzzleException
      */
-    protected function postQuery(string $url, array $params,?array $header = null):string{
+    protected function postQuery(string $url, array $params, ?array $header = null): string
+    {
         $options = [
-            "form_params" => $params
+            'form_params' => $params,
         ];
-        if($header!==null){
+        if ($header !== null) {
             $options['header'] = $header;
         }
         $response = $this->client->post($url, $options);
-        return (string)$response->getBody();
+
+        return (string) $response->getBody();
     }
 }

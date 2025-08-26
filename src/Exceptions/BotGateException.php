@@ -2,7 +2,4 @@
 
 namespace VladViolentiy\VivaBotGates\Exceptions;
 
-class BotGateException extends \Exception
-{
-
-}
+class BotGateException extends \Exception {}
